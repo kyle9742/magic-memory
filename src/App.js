@@ -16,12 +16,17 @@ function App() {
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
+  const [disabled, setDisabled] = useState(false);
   
   const shuffledCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5) // .sort 는 정렬
       .map((card) => ({ ...card, id: Math.random() }));
 
+    setCards(shuffledCards);
+    setTurns(0);
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
   };
@@ -35,6 +40,7 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns((prev) => prev + 1);
+    setDisabled(false);
   };
 
   useEffect(() => {
@@ -57,6 +63,9 @@ function App() {
     }
   }, [choiceOne, choiceTwo]);
 
+  useEffect(() => {
+    shuffledCards();
+  }, []);
   
   return (
     <>
@@ -69,9 +78,12 @@ function App() {
             <SingleCard 
             handleChoice={handleChoice} 
             card={card} key={card.id} 
-            flipped={card === choiceOne || card === choiceTwo || card.matched}/>
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
+          />
           ))}
         </div>
+        <p>턴수 : {turns}</p>
       </div>
     </>
   );

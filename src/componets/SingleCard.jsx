@@ -1,9 +1,10 @@
 import React from "react";
 import "./SingleCard.css";
 
-const SingleCard = ({card, handleChoice, flipped}) => {
+const SingleCard = ({card, handleChoice, flipped, disabled}) => {
   const handleClick = () => {
-    handleChoice(card)
+    if(!disabled) 
+      handleChoice(card); // if구문이 실행할 함수가 하나이므로 {} 생략 가능!!
   }
   return (
     <div className="card">
