@@ -31,6 +31,8 @@ function App() {
     setTurns(0);
   };
 
+
+
   function handleChoice(card) {
     console.log(card);
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
@@ -46,7 +48,7 @@ function App() {
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       setDisabled(true);
-      if (choiceOne.src === choiceTwo.src) {
+      if (choiceOne.src === choiceTwo.src && choiceOne.id !== choiceTwo.id) {
         setCards((prevCards) => {
           return prevCards.map(card => {
             if (card.src === choiceOne.src) {
