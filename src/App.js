@@ -55,7 +55,7 @@ function App() {
     setTurns((prev) => prev + 1);
   };
 
-  console.log(cards, cards.id);
+  
 
   return (
     <>
